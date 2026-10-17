@@ -13,9 +13,10 @@ role presets.
 
 <!--TOC-->
 
-- [Basic Repo Template](#llamafile-systemd-template)
+- [llamafile Systemd Template](#llamafile-systemd-template)
   - [Description](#description)
   - [Quickstart](#quickstart)
+  - [Preset configurations](#preset-configurations)
   - [Contributing, changelog and security](#contributing-changelog-and-security)
   - [Consulting and custom integrations](#consulting-and-custom-integrations)
   - [License](#license)

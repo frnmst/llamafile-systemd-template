@@ -11,7 +11,7 @@ SPDX-License-Identifier: MIT
 - [Contributing](#contributing)
   - [Git branches](#git-branches)
   - [Pull requests](#pull-requests)
-    - [Unit tests](#unit-tests)
+    - [Preset configuration](#preset-configuration)
   - [Variable naming](#variable-naming)
   - [AI Policy](#ai-policy)
     - [Commits](#commits)

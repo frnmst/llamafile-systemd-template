@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-*.lock
+# *.lock
 
 Dockerfile.python3.13_hatchling.build
 .dockerfile_build_python_dist
