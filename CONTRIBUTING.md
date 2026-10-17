@@ -32,47 +32,21 @@ If you want to contribute, please follow these simple policies.
 
 ## Pull requests
 
-> [!NOTE]
-> It's not a problem if you can't add unit tests, but please show some simple
-> reproducible examples of why the fix or feature is necessary.
+1. add a new feature, fix and preset
+2. create a pull request on the `dev` branch
 
-1. add a new feature or fix
-2. add unit tests by mocking the files if necessary (see note below):
-  - valid cases
-  - edge cases
-  - invalid cases
-3. run the [unit tests](#unit-tests)
-4. create a pull request on the `dev` branch
+### Preset configuration
 
-### Unit tests
-
-1. install the Python versions listed in the
-   [pyproject.toml](pyproject.toml) `tool.tox.env_list` entry: use
-   [ASDF](https://asdf-vm.com/guide/getting-started.html)
-2. install the development environment as shown in the python-makefile[^1]
-   repository (see footnotes)
-3. run the tests with TOX:
-
-   ```shell
-   make tox
-   ```
-
-   or
-
-   ```shell
-   tox run-parallel
-   ```
-
-4. all tests must pass
+Please redact all sensitive data before making a PR.
 
 ## Variable naming
 
 To keep things uniform and simple please use snake\_case for all variables and
-type hints.
+type hints. Environment variable must be UPPER\_SNAKE\_CASE.
 
 ## AI Policy
 
-basic-repo-template is human-authored, and (now) AI-assisted code for some
+llamafile-systemd-template is human-authored, and AI-assisted code for some
 brainstorming and debugging: LLM use is not blanket-banned, but all its outputs
 must be thoroughly checked. LLMs can be used for ideas and specific domain
 problem solving, but its outputs must always be challenged to provide better
