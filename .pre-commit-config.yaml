@@ -53,7 +53,8 @@ repos:
           ^packages/|
           ^pyproject\.toml|
           ^safe_install\.sh|
-          .*\.lock
+          .*\.lock|
+          ^config/
         )
 
 - repo: https://github.com/frnmst/md-toc
