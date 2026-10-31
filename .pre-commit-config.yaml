@@ -54,7 +54,11 @@ repos:
           ^pyproject\.toml|
           ^safe_install\.sh|
           .*\.lock|
-          ^config/
+          ^config/|
+          ^custom_llamafiles/.*\.gguf|
+          ^custom_llamafiles/.*\.llamafile|
+          ^custom_llamafiles/llamafile|
+          ^custom_llamafiles/zipalign
         )
 
 - repo: https://github.com/frnmst/md-toc

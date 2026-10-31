@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: 2026-2026 Franco Masotti (See /README.md)
+#
+# SPDX-License-Identifier: MIT
+
+[Unit]
+Description=Run a llamafile model %i
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+# Config.
+Environment=HOME=/home/llamafile
+Environment=MODEL_DIR=/home/llamafile/llamafiles
+Environment=PORT=8001
+
+# When serving globally, use a reverse proxy instead of 0.0.0.0 here!
+Environment=HOST=127.0.0.1
+
+# Other values: 'auto'
+Environment=GPU=none
+
+# Other values: 'all'
+Environment=GPU_LAYERS=0
+
+User=llamafile
+Group=llamafile
+PrivateTmp=true
+
+# Newer models use this path.
+Environment=LLAMAFILE_BASE_URL=https://huggingface.co/mozilla-ai/llamafile_0.10/resolve/main
+
+# CPU optimizations.
+Nice=-10
+
+# Downloads the llamafile.
+ExecStartPre=/bin/bash -c \
+   'if [ ! -f ${MODEL_DIR}/%i ]; then \
+        curl --location --output ${MODEL_DIR}/%i ${LLAMAFILE_BASE_URL}/%i; \
+        chmod 700 ${MODEL_DIR}/%i; \
+   fi'
+ExecStart=/bin/bash -c \
+   '${MODEL_DIR}/%i \
+       --reasoning off \
+       --flash-attn 1 \
+       --gpu ${GPU} \
+       --gpu-layers ${GPU_LAYERS} \
+       --port ${PORT} \
+       --host ${HOST} \
+       --nologo \
+       --server'
+
+[Install]
+WantedBy=multi-user.target

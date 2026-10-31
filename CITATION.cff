@@ -12,9 +12,9 @@ url: 'https://github.com/frnmst/llamafile-systemd-template'
 abstract: >-
   Let Systemd download and run llamafiles via a unit file template. This
   repository also contains suggested roles and configurations you can import
-  with one click. It is heavily oriented on light models run on older CPUs
-  only.
-version: 0.1.0
+  with one click. It is heavily oriented on light models to be run on older
+  CPUs only.
+version: 0.3.0
 keywords:
   - ai
   - ai-cpu
@@ -23,6 +23,8 @@ keywords:
   - automation
   - cpu-ai
   - cpu-llm
+  - llama
+  - llama-cpp
   - llamafile
   - llamafile-cpu
   - llamafiles

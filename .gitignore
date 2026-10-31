@@ -4,6 +4,10 @@
 
 # *.lock
 
+custom_llamafiles/*.gguf
+custom_llamafiles/*.llamafile
+custom_llamafiles/llamafile
+custom_llamafiles/zipalign
 Dockerfile.python3.13_hatchling.build
 .dockerfile_build_python_dist
 *.md

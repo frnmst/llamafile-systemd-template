@@ -1,0 +1,12 @@
+-m
+/zip/Qwen2.5-Coder-7B-Instruct-Abliterated-Q4_K_M.gguf
+-fa
+on
+--temp
+0.75
+--top-p
+0.9
+--min-p
+0.075
+--reasoning
+off
