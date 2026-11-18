@@ -14,7 +14,7 @@ abstract: >-
   repository also contains suggested roles and configurations you can import
   with one click. It is heavily oriented on light models to be run on older
   CPUs only.
-version: 0.3.0
+version: 0.4.0
 keywords:
   - ai
   - ai-cpu

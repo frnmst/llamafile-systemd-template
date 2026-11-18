@@ -23,8 +23,10 @@ role presets. Fine tuned for CPU inference.
   - [GPU](#gpu)
     - [Intel iGPU](#intel-igpu)
   - [Preset configurations](#preset-configurations)
+  - [System prompts guidelines](#system-prompts-guidelines)
   - [Tested models](#tested-models)
     - [CPU](#cpu)
+      - [Intel Core i5 9400 (CPU only)](#intel-core-i5-9400-cpu-only)
       - [Intel Core i7 9700 (CPU only)](#intel-core-i7-9700-cpu-only)
   - [Contributing, changelog and security](#contributing-changelog-and-security)
   - [Consulting and custom integrations](#consulting-and-custom-integrations)
@@ -169,9 +171,48 @@ the system, this solution might be slower that using pure CPU.
 ./config/{model_filename}/{role}.json
 ```
 
-A good source of system prompts are the ones used by
-[DuckDuckGo AI chat](https://duck.ai/chat?ia=chat&duckai=1).
+## System prompts guidelines
 
+A good source of system prompts are the ones used by
+[DuckDuckGo AI chat](https://duck.ai/chat?ia=chat&duckai=1). You can ask a
+more advanced LLM to help you generate an appopriate system prompt for the
+local models you want to use. When generating a system prompt be sure to
+specify:
+
+- exact model used along with context sizes
+- CPU only inference
+- specific scope, tools to use and expected output format (required for coding
+  tasks)
+- use positive and avoid negative assertions
+- an short example of expected output
+- fallback outputs
+
+You can use this meta-prompt, for example:
+
+```
+Write a system prompt for [EXACT MODEL, e.g., Qwen3.5-9B-Q5_K_S] running on CPU-only inference (llamafile) with a [CONTEXT SIZE, e.g., 4096] context window.
+
+Requirements for the system prompt you write:
+- Keep it ultra-concise (under 300 tokens) to preserve attention on a 9B quantized model.
+- Use positive framing only; never mention forbidden libraries, words, or behaviors.
+- Define the exact scope, allowed APIs/tools, and strict bare output format (e.g., single ```python code block with no prose or comments).
+- Include 1 concise Input/Output example demonstrating the exact structure and trickiest edge case.
+- Include an explicit fallback output (e.g., `pass`) if the input cannot be processed under the rules.
+```
+
+You'll probably need to tweak it a little based on the local model output.
+After that, you can export the settings and add a PR to this repo.
+
+See also:
+
+- https://claude.com/resources/articles/best-practices-for-prompt-engineering
+- https://www.promptingguide.ai/techniques/fewshot
+
+> [!IMPORTANT]
+> Use the llamafile chats as one shot: one input prompt, 1 output prompt,
+> copy output, delete chat. This way the LLM doesn't need to parse a huge
+> context for followup prompts. If you need more guidance from the LLM, just
+> open a new chat and tweak the user or system prompt.
 
 ## Tested models
 
@@ -180,14 +221,20 @@ A good source of system prompts are the ones used by
 
 ### CPU
 
+#### Intel Core i5 9400 (CPU only)
+
+| Model Name | Average Tok/s | Total system RAM (G) | Speed notes | Output quality |
+|------------|---------|-------------|------------------|---|
+| Qwen3.5-9B-Q5\_K\_S | 4.25 | 32 | Limit of being acceptable | Good |
+
 #### Intel Core i7 9700 (CPU only)
 
-| Model Name | Average Tok/s | Total system RAM (G) | Speed notes |
-|------------|---------|-------------|------------------|
-| Ministral-3-3B-Instruct-2512-Q4\_K\_M | 9 | 16 | Quite fast |
-| Ornith-1.5-9B-Q4\_K\_M | 4.5 | 16 | Limit of being acceptable |
-| Qwen3.5-9B-Q5\_K\_S | 4 | 16 | Limit of being acceptable |
-| Qwen2.5-Coder-7B-Instruct-Abliterated-Q4\_K\_M | 4.5 | 16 | Limit of being acceptable |
+| Model Name | Average Tok/s | Total system RAM (G) | Speed notes | Output quality |
+|------------|---------|-------------|------------------|---|
+| Ministral-3-3B-Instruct-2512-Q4\_K\_M | 9 | 16 | Quite fast | So-so |
+| Ornith-1.5-9B-Q4\_K\_M | 4.5 | 16 | Limit of being acceptable | So-So |
+| Qwen3.5-9B-Q5\_K\_S | 4 | 16 | Limit of being acceptable | Good |
+| Qwen2.5-Coder-7B-Instruct-Abliterated-Q4\_K\_M | 4.5 | 16 | Limit of being acceptable | So-so |
 
 ## Contributing, changelog and security
 
